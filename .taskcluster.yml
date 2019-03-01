@@ -8,12 +8,6 @@ tasks:
       workerType: 'github-worker'
       scopes:
         - secrets:get:repo:github.com/mozilla-releng/product-details:branch:testing
-      extra:
-        github:
-          events:
-            - push
-          branches:
-            - testing
       payload:
         maxRunTime: 3600
         image: python
