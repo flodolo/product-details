@@ -4,6 +4,9 @@ policy:
 tasks:
   $match:
     'tasks_for == "github-push" && event.ref == "refs/heads/testing"':
+      taskId: {$eval: as_slugid("testing_task")}
+      created: {$fromNow: ''}
+      deadline: {$fromNow: '1 hour'}
       provisionerId: 'aws-provisioner-v1'
       workerType: 'github-worker'
       scopes:
