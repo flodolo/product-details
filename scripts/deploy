@@ -4,4 +4,4 @@ export AWS_ACCESS_KEY_ID=$(curl ${TC_SECRET_URL} | python3 -c 'import json, sys;
 export AWS_SECRET_ACCESS_KEY=$(curl ${TC_SECRET_URL} | python3 -c 'import json, sys; a = json.load(sys.stdin); print(a["secret"]["aws_secret_key"])')
 
 
-aws s3 ls "s3://${WEBSITE_BUCKET}"
+aws s3 sync ./repo/public/ "s3://${WEBSITE_BUCKET}/"

@@ -26,7 +26,7 @@ tasks:
           - >-
             git clone ${event.repository.clone_url} repo && cd repo &&
             git checkout ${event.after} &&
-            pip3 install awscli --upgrade && ./scripts/deploy
+            pip3 -q install awscli --upgrade && ./scripts/deploy
       metadata:
         name: deploy testing
         description: 'Deploy to https://product-details.testing.mozilla-releng.net/'
