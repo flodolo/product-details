@@ -13,14 +13,20 @@ tasks:
         - secrets:get:repo:github.com/mozilla-releng/product-details:branch:testing
       payload:
         maxRunTime: 3600
-        image: python
+        image: python:3
+        env:
+          TC_SECRET_URL: http://taskcluster/secrets/v1/secret/repo:github.com/mozilla-releng/product-details:branch:testing
+          WEBSITE_BUCKET: relengstatic-testing-productdetails-static-website
+        features:
+          taskclusterProxy: true
         command:
           - /bin/bash
           - '--login'
           - '-c'
           - >-
             git clone ${event.repository.clone_url} repo && cd repo &&
-            git checkout ${event.after} && aws s3 ls
+            git checkout ${event.after} &&
+            pip3 install awscli --upgrade --user && ./scripts/deploy
       metadata:
         name: deploy testing
         description: 'Deploy to https://product-details.testing.mozilla-releng.net/'
