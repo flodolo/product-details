@@ -20,7 +20,7 @@ tasks:
           - '-c'
           - >-
             git clone ${event.repository.clone_url} repo && cd repo &&
-            git checkout ${event.after}
+            git checkout ${event.after} && aws s3 ls
       metadata:
         name: deploy testing
         description: 'Deploy to https://product-details.testing.mozilla-releng.net/'
